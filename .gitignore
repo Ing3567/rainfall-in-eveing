@@ -1,0 +1,9 @@
+﻿Lib/
+Scripts/
+Include/
+pyvenv.cfg
+__pycache__/
+*.pyc
+*.zip
+beer/
+tempCodeRunnerFile.py
