@@ -5,7 +5,7 @@ import pandas as pd
 
 sns.set_theme(style="whitegrid")
 
-def plot_hourly_rain_prob(df):
+def plot_time_seri(df):
     if 'hour' not in df.columns or 'is_raining' not in df.columns:
         print("Error: Missing 'hour' or 'is_raining' columns.")
         return
@@ -19,7 +19,7 @@ def plot_hourly_rain_prob(df):
     plt.xlabel("Hour of Day (0-23)")
     plt.ylabel("Probability of Rain (%)")
     plt.xticks(range(0, 24)) 
-    plt.axvspan(17, 20, color='orange', alpha=0.2, label='Evening (17-20)') 
+    plt.axvspan(16, 18, color='orange', alpha=0.2, label='Evening (16-18 hrs)') 
     plt.legend()
     plt.show()
 
