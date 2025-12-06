@@ -1,7 +1,7 @@
 import argparse
 import pandas as pd
 from Clean import Clean_data, check_rain_in_evening
-from Visualize import plot_correlation, plot_hourly_rain_prob, plot_boxplot, plot_monthly_heatmap, plot_yearly_total , plot_scatter_custom
+from Visualize import plot_correlation, plot_time_seri, plot_boxplot, plot_monthly_heatmap, plot_yearly_total , plot_scatter_custom
 
 def load_data(file_path):
     return pd.read_csv(file_path, skiprows=3)
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     if args.plot != "none":
         print(f"\n--- Generating Plot: {args.plot} ---")
         if args.plot == "line":
-            plot_hourly_rain_prob(data)
+            plot_time_seri(data)
         elif args.plot == "heatmap":
             plot_monthly_heatmap(data)
         elif args.plot == "bar":
