@@ -90,11 +90,10 @@ def plot_scatter_custom(df):
 
 def plot_boxplot(df):
     print("\n--- Select Boxplot Mode ---")
-    print("1: Monthly (ดูการกระจายตัวรายเดือน)")
-    print("2: Hourly  (ดูการกระจายตัวรายชั่วโมง)")
+    print("1: Monthly (ดูการกระจายตัวรายเดือน - รวมทุกปี)")
+    print("2: Hourly  (ดูการกระจายตัวรายชั่วโมง - รวมทุกปี)")
     print("3: Yearly  (เปรียบเทียบข้อมูลระหว่างปี)") 
     mode = input("Enter mode (1, 2, or 3): ").strip()
-    
     
     print("\nAvailable columns:", df.columns.tolist())
     input_col = input("Enter column name (e.g., temperature_2m (°C)): ").strip()
@@ -103,55 +102,47 @@ def plot_boxplot(df):
         print(f"Error: Column '{input_col}' not found.")
         return
 
-   
-    df['time'] = pd.to_datetime(df['time'])
-    df['year'] = df['time'].dt.year
+    # แปลงข้อมูลเวลาให้พร้อมใช้
+    if 'time' in df.columns and not pd.api.types.is_datetime64_any_dtype(df['time']):
+        df['time'] = pd.to_datetime(df['time'])
     
+    # สร้างคอลัมน์ year หากยังไม่มี (สำหรับ mode 3)
+    if 'year' not in df.columns:
+        df['year'] = df['time'].dt.year
     
+    # ใช้ข้อมูลทั้งหมด (ไม่ต้องกรองปีแล้ว)
     df_selected = df.copy()
     title_suffix = "(All Years)"
 
-
-    if mode in ['1', '2']:
-        print("\n(Optional) Enter a specific year to filter, or press Enter to see all years.")
-        input_year = input("Enter year (e.g., 2023): ").strip()
-        
-        if input_year.isdigit():
-            target_year = int(input_year)
-            df_selected = df[df['year'] == target_year].copy()
-            title_suffix = f"in {target_year}"
-            
-            if df_selected.empty:
-                print(f"No data found for year {target_year}")
-                return
-
-   
     plt.figure(figsize=(14, 6))
     
     if mode == '1': 
+        # Mode 1: Monthly Distribution
         df_selected['month_name'] = df_selected['time'].dt.month_name()
         month_order = ['January', 'February', 'March', 'April', 'May', 'June', 
                        'July', 'August', 'September', 'October', 'November', 'December']
-        sns.boxplot(data=df_selected, x='month_name', y=input_col, order=month_order, palette="Set3")
+        # ใช้ hue เป็น month_name เพื่อแก้ warning ของ seaborn ตัวใหม่ แต่ซ่อน legend
+        sns.boxplot(data=df_selected, x='month_name', y=input_col, order=month_order, palette="Set3", hue='month_name', legend=False)
         plt.xlabel("Month")
         plt.title(f"Monthly Distribution of {input_col} {title_suffix}")
         plt.xticks(rotation=45)
         
     elif mode == '2':
+        # Mode 2: Hourly Distribution
         df_selected['hour'] = df_selected['time'].dt.hour
-        sns.boxplot(data=df_selected, x='hour', y=input_col, palette="coolwarm")
+        sns.boxplot(data=df_selected, x='hour', y=input_col, palette="coolwarm", hue='hour', legend=False)
         plt.xlabel("Hour of Day (0-23)")
         plt.title(f"Hourly Distribution of {input_col} {title_suffix}")
         
     elif mode == '3': 
-        sns.boxplot(data=df_selected, x='year', y=input_col, palette="viridis")
+        # Mode 3: Yearly Comparison
+        sns.boxplot(data=df_selected, x='year', y=input_col, palette="viridis", hue='year', legend=False)
         plt.xlabel("Year")
         plt.title(f"Yearly Comparison of {input_col}")
         
     else:
         print("Invalid mode selected.")
         return
-
 
     plt.ylabel(input_col)
     plt.grid(axis='y', linestyle='--', alpha=0.7)

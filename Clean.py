@@ -4,6 +4,7 @@ def Clean_data(data):
     data['time'] = pd.to_datetime(data['time'])
     data['is_raining'] = data['rain (mm)'] > 0.01
     data['year'] = pd.to_datetime(data['time']).dt.year
+    data['month'] = pd.to_datetime(data['time']).dt.month
     data['hour'] = pd.to_datetime(data['time']).dt.hour
     return data
 
