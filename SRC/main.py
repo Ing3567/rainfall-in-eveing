@@ -37,7 +37,7 @@ if __name__ == "__main__":
         print(f"\n--- Generating Plot: {args.plot} ---")
         if args.plot == "timeseries": vis.plot_time_series(data)
         elif args.plot == "heatmap": vis.plot_monthly_heatmap(data)
-        elif args.plot == "boxplot": vis.plot_boxplot(data, args.col, mode='hourly')
+        elif args.plot == "boxplot": vis.plot_boxplot(data, args.col, mode='monthly')
         elif args.plot == "seasonality": vis.plot_seasonality_comparison(data, args.col, "Custom", args.col)
         elif args.plot == "drivers": vis.plot_rain_drivers_prob(data)
         elif args.plot == "humidity_kde": vis.plot_humidity_kde(data)
