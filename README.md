@@ -39,7 +39,7 @@ python main.py --plot evening_trend --year 2024
 ```
 python ./forcast.py
 ```
-แสดงผลเป็นกราฟ3ชุด
-1.Feature Importance
-2.Forecast vs Actual
-3.Evaluation Metrics
+แสดงผลเป็นกราฟ3ชุด <br>
+1.Feature Importance<br>
+2.Forecast vs Actual<br>
+3.Evaluation Metrics<br>
