@@ -17,12 +17,12 @@ pip install -r requirements.txt
 ```
 python ./main.py
 ```
-คำสั่งเพิ่มเติม
---file ไฟล์ที่ใช้
---mode ใช้ดูข้อมูลtextบนterminal
---plot เลือกที่ต้องแสดง
---col เลือกคอลัมที่สนใจ
---year เลือกปัที่สนใจ
+Argument,Description,Example
+--file,Path to the CSV data file (Default: data/weather_2021-2025.csv),--file data/my_weather.csv
+--mode,"Text Analysis Mode: View summary stats or feature importance on the terminal.  Options: summary, rain_drivers, rain_comparison",--mode rain_drivers
+--plot,"Visualization Mode: Generate specific plots.  Options: timeseries, heatmap, boxplot, seasonality, drivers, evening_scatter",--plot heatmap
+--col,"Select a specific column for analysis (e.g., Temperature, Pressure).","--col ""pressure_msl (hPa)"""
+--year,Filter analysis for a specific year (useful for evening trends).,--year 2024
 
 ตัวอย่างคำสั่ง
 ```
