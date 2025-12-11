@@ -17,13 +17,13 @@ pip install -r requirements.txt
 ```
 python ./main.py
 ```
-คำสั่งเพิ่มเติม \n
---file ไฟล์ที่ใช้ \n
---mode ใช้ดูข้อมูลtextบนterminal \n
---plot เลือกที่ต้องแสดง \n
---col เลือกคอลัมที่สนใจ \n
---year เลือกปัที่สนใจ \n
-
+คำสั่งเพิ่มเติม <br>
+--file ไฟล์ที่ใช้ <br>
+--mode ใช้ดูข้อมูลtextบนterminal <br>
+--plot เลือกที่ต้องแสดง <br>
+--col เลือกคอลัมที่สนใจ <br>
+--year เลือกปัที่สนใจ <br>
+ <br>
 ตัวอย่างคำสั่ง
 ```
 python ./main.py --mode rain_drivers
